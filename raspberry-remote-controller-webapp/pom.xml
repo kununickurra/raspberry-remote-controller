@@ -11,33 +11,14 @@
     <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>raspberry-remote-controller-webapp</artifactId>
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-core</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-web</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-webmvc</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-    <!--</dependencies>-->
     <dependencies>
         <dependency>
             <groupId>com.iot</groupId>
             <artifactId>raspberry-remote-controller-dao-impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+    </dependency>
         <dependency>
             <groupId>com.iot</groupId>
             <artifactId>raspberry-remote-controller-service-rest-impl</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.iot</groupId>
@@ -69,10 +50,7 @@
             <version>1.2</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
+        <!-- TODO: Needed for runtime ? -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -85,14 +63,6 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.codehaus.jackson</groupId>-->
-            <!--<artifactId>jackson-core-asl</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.codehaus.jackson</groupId>-->
-            <!--<artifactId>jackson-mapper-asl</artifactId>-->
-        <!--</dependency>-->
     </dependencies>
     <profiles>
        <profile>

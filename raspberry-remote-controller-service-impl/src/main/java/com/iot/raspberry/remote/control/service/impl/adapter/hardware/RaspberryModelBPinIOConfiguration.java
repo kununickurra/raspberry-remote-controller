@@ -1,4 +1,4 @@
-package com.iot.raspberry.remote.control.service.support;
+package com.iot.raspberry.remote.control.service.impl.adapter.hardware;
 
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.RaspiPin;

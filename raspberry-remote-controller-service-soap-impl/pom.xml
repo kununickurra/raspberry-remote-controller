@@ -16,7 +16,6 @@
         <dependency>
             <groupId>com.cgi.poc</groupId>
             <artifactId>raspberry-domotic-controller-soap-spec</artifactId>
-            <version>${raspberry.domotic.controller.soap.spec.version}</version>
         </dependency>
         <dependency>
             <groupId>com.iot</groupId>
@@ -34,10 +33,5 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
     </dependencies>
-
 </project>

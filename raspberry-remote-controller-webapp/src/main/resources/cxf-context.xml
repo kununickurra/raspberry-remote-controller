@@ -21,7 +21,7 @@
     <!--<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />-->
 
     <!-- End point declaration -->
-    <jaxws:endpoint id="DomoticService" implementor="com.iot.raspberry.remote.control.service.soap.impl.PowerSwitchSOAPServiceImpl"
+    <jaxws:endpoint id="PowerSwitchBoxService" implementor="com.iot.raspberry.remote.control.service.soap.impl.PowerSwitchSOAPServiceImpl"
                     address="/PowerSwitchBoxService"/>
 
 </beans>

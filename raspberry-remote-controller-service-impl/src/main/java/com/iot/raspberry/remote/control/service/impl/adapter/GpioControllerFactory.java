@@ -1,4 +1,4 @@
-package com.iot.raspberry.remote.control.service.support;
+package com.iot.raspberry.remote.control.service.impl.adapter;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;

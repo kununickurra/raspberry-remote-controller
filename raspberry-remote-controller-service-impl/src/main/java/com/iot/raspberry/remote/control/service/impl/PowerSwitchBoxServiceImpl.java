@@ -1,4 +1,4 @@
-package com.iot.raspberry.remote.control.service;
+package com.iot.raspberry.remote.control.service.impl;
 
 import com.iot.raspberry.remote.control.dao.spec.PowerSwitchConfigurationDao;
 import com.iot.raspberry.remote.control.domain.PowerSwitch;
@@ -6,7 +6,7 @@ import com.iot.raspberry.remote.control.domain.SwitchState;
 import com.iot.raspberry.remote.control.domain.configuration.PowerSwitchConfiguration;
 import com.iot.raspberry.remote.control.service.spec.PowerSwitchBoxService;
 import com.iot.raspberry.remote.control.service.spec.exception.SwitchNotFoundException;
-import com.iot.raspberry.remote.control.service.support.GpioPinAdapter;
+import com.iot.raspberry.remote.control.service.impl.adapter.GpioPinAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

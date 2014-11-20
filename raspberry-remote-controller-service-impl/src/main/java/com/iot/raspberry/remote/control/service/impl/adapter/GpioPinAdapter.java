@@ -1,6 +1,8 @@
-package com.iot.raspberry.remote.control.service.support;
+package com.iot.raspberry.remote.control.service.impl.adapter;
 
 import com.iot.raspberry.remote.control.domain.SwitchState;
+import com.iot.raspberry.remote.control.service.impl.adapter.convertor.StateMapping;
+import com.iot.raspberry.remote.control.service.impl.adapter.model.RaspberryGpioPin;
 import com.iot.raspberry.remote.control.service.spec.exception.SwitchNotFoundException;
 import com.pi4j.io.gpio.*;
 import org.slf4j.Logger;
@@ -15,10 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by tilliern on 5/11/2014.
- */
-@Component
-/**
  * GPIO adapter using the pi4j libraries to handle GPIO pins. {@link http://pi4j.com/}
  *
  * Initialization of the GPIO pins (Controller + pin provisioning) and the controller is done using the @PostConstruct.
@@ -28,15 +26,14 @@ import java.util.Map;
  * Resources will be cleaned in when destroying (@PreDestroy) the context
  *
  */
+@Component
 public class GpioPinAdapter {
 
+    //TODO: Investigate if we need to create a separated module for the Adapter
     private static final Logger LOG = LoggerFactory.getLogger(GpioPinAdapter.class);
 
     @Autowired
-    private SwitchStateToPinStateConverter switchStateToPinStateConverter;
-
-    @Autowired
-    private PinStateToSwitchStateConverter pinStateToSwitchStateConverter;
+    private StateMapping stateMapping;
 
     @Autowired
     private GpioControllerFactory gpioControllerFactory;
@@ -54,14 +51,14 @@ public class GpioPinAdapter {
 
         LOG.info("Starting provisioning Raspberry GPIO pins...");
         provisionedPins = new HashMap<Pin, GpioPinDigitalOutput>();
-        Collection<Pin> configuredPins = pinConfigurationStorage.getConfiguration();
+        Collection<RaspberryGpioPin> configuredPins = pinConfigurationStorage.getConfiguration();
 
-        for (Pin pin : configuredPins) {
-            LOG.info("Provisioning GPIO pin {}", pin.getName());
-            GpioPinDigitalOutput pinControl = gpioControllerFactory.getInstance().provisionDigitalOutputPin(pin);
+        for (RaspberryGpioPin raspberryGpioPin : configuredPins) {
+            LOG.info("Provisioning GPIO pin {}", raspberryGpioPin.getPin().getName());
+            GpioPinDigitalOutput pinControl = gpioControllerFactory.getInstance().provisionDigitalOutputPin(raspberryGpioPin.getPin());
             pinControl.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
-            provisionedPins.put(pin, pinControl);
-            LOG.info("GPIO pin {} provisioned", pin.getName());
+            provisionedPins.put(raspberryGpioPin.getPin(), pinControl);
+            LOG.info("GPIO pin {} provisioned", raspberryGpioPin.getPin().getName());
         }
         LOG.info("GPIO pin provisioning completed successfully on Raspberry...");
     }
@@ -88,11 +85,11 @@ public class GpioPinAdapter {
      * Change the Pin state
      *
      * @param switchId Id
-     * @param state new state.
+     * @param state    new state.
      * @throws SwitchNotFoundException in case no configured switch is found using the given id.
      */
     public synchronized void setPinState(int switchId, SwitchState state) throws SwitchNotFoundException {
-        PinState newState = switchStateToPinStateConverter.convert(state);
+        PinState newState = stateMapping.mapToPinState(switchId, state);
         Pin pin = tryGetPinFromConfiguration(switchId);
         GpioPinDigitalOutput pinControl = provisionedPins.get(pin);
         LOG.info("Changing GPIO pin {} to state {} ...", pin, newState);
@@ -101,6 +98,7 @@ public class GpioPinAdapter {
 
     /**
      * Retrieve Pin state
+     *
      * @param switchId Id
      * @return State of the switch that matches the Id provided
      * @throws SwitchNotFoundException in case no configured switch is found using the given id.
@@ -110,14 +108,14 @@ public class GpioPinAdapter {
         GpioPinDigitalOutput pinControl = provisionedPins.get(pin);
         PinState state = pinControl.getState();
         LOG.info("Current state of GPIO pin {} is {} ...", pin, state);
-        return pinStateToSwitchStateConverter.convert(state);
+        return stateMapping.mapToSwitchState(switchId, state);
     }
 
     private Pin tryGetPinFromConfiguration(int switchId) throws SwitchNotFoundException {
-        Pin pin = pinConfigurationStorage.getPin(switchId);
-        if (pin == null) {
+        RaspberryGpioPin raspberryGpioPin = pinConfigurationStorage.getPin(switchId);
+        if (raspberryGpioPin == null) {
             throw new SwitchNotFoundException(switchId);
         }
-        return pin;
+        return raspberryGpioPin.getPin();
     }
 }
