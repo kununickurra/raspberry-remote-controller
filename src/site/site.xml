@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.3.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd"
+        name="Raspberry remote controller">
+
+    <!-- START SNIPPET: skin-configuration -->
+    <skin>
+        <groupId>lt.velykis.maven.skins</groupId>
+        <artifactId>reflow-maven-skin</artifactId>
+        <version>1.0.0</version>
+    </skin>
+    <!-- END SNIPPET: skin-configuration -->
+
+    <body>
+        <menu name="Configuration">
+            <item name="What is the remote controller about" href="about.html"/>
+            <item name="How to configure the remote control" href="configuration.html"/>
+            <item name="How to install the remote control service on your Raspberry" href="installation.html"/>
+            <item name="Physical wiring" href="physicalwiring.html"/>
+            <item name="Testing the services" href="testingwebservice.html"/>
+        </menu>
+
+        <menu ref="parent"/>
+        <!--<menu ref="modules"/>-->
+        <!--<menu ref="reports"/>-->
+    </body>
+
+    <custom>
+        <!-- START SNIPPET: skin-customisation -->
+        <reflowSkin>
+            <theme>bootswatch-united</theme>
+            <skinAttribution>false</skinAttribution>
+            <highlightJs>true</highlightJs>
+            <slogan>raspberry-remote-controller</slogan>
+            <protocolRelativeURLs>${protocol.relative.urls.reflow}</protocolRelativeURLs>
+        </reflowSkin>
+        <!-- END SNIPPET: skin-customisation -->
+    </custom>
+
+</project>
+

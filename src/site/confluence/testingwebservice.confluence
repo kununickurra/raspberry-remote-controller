@@ -1,0 +1,59 @@
+h1. Testing the SOAP and REST web services
+
+h2. Test web app.
+A very simple web app is deployed to test your configuration and is deployed in the [root context]/web/index.html
+Get to the index page of the deployed web app to start using it.
+
+h2. REST service
+
+The REST service is deployed at the following URL:
+*http://_\[IP of your raspberry\]_/web/rest*
+
+Here are the operations that are exposed by the REST service:
+
+||*Method*||*URL*||*Description*||
+|GET||_/powerswitch_|Get all configured power switches|
+|GET||_/powerswitch/\{id\}_|Get a single power switch by ID|
+|PUT||_/powerswitch/\{id\}/turnon_|Turn on power switch by ID|
+|PUT||_/powerswitch/\{id\}/turnoff_|Turn off power switch by ID|
+
+Structure of the JSON returned:
+{code}
+"links":[  // Hypermedia links
+      {
+         "rel":"self",
+         "href":"http://[url service]/switch/1",
+      },
+      {   // The link provided will depend on the current state. ON/OFF
+         "rel":"[turnOnSwitch/ turnOffSwitch]",
+         "href":"http://[url service]/switch/1/turn[on/off]",
+      }
+],
+"content":{   // The power switch Information
+      "id":[Unique identifier - Integer],
+      "name":"[Name of the power switch - String]",
+      "switchState":"[ON/OFF]"
+   }
+{code}
+
+JSON error structure
+{code}
+{
+"code" :  "1001"
+"message" : "PowerSwitch [id requested] not found..."
+}
+{code}
+
+h2. SOAP service
+
+Service is deployed at the following *URL http://[IP of your raspberry]/soap/PowerSwitchBoxService*
+
+!images\screenshots\SOAP_Service_spec.png!
+
+
+Message returned representing a power switch.
+
+
+!images\screenshots\SOAP_Service_message.png!
+
+The WSDL & XSD can be found in the project *raspberry-remote-controller-soap-spec* build during the [installation]

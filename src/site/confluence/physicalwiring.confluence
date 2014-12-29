@@ -1,0 +1,30 @@
+h1. Simple physical wiring for a Raspberry with a relay card
+
+This section will very briefly explain how to wire a simple lamp to a relay card that can be switched on and off.
+
+h2. Raspberry GPIO configuration
+
+The schema below represents the GPIO configuration for a *Raspberry model B*
+
+!images\GPIO-Numbering-RaspberryB.png!
+
+If you have another model, you can find the appropriate wiring here on the Pi4j project [http://pi4j.com/]
+
+h2. Wiring the GPIOs to the relay card.
+
+To drive your relay card:
+* Connect the *GND* of the GPIO bus to the *GND* on the relay card
+* Connect the *5v* of your GPIO bus to the *5v VCC* on the relay card
+* Connect the *GPIO pins* (e.g GPIO 0) to the *inputs* you want to drive on your relay card.
+
+Connect your 220v device as described below.
+
+The example below shows how to wire it all together.
+
+!images\relay-breadboard.png!
+
+Note that the device connected here is not a raspberry but the principle is exactly the same.
+
+Make sure that the configuration of your remote controller is still correct, check [configuration]
+
+*PS: This example includes wiring with 220v power and can be very HARMFUL; make sure you know what you are doing !*

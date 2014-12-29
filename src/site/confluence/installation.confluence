@@ -1,0 +1,49 @@
+h1. Install the remote-controller web application on your raspberry.
+
+This guide describes how to get started with your remote controller and deploy it on your raspberry.
+
+h2. Prerequisites
+
+h3. Web server setup
+
+Install apache Tomcat (or any other web server) on your raspberry.
+
+h3. Pi4j
+* The raspberry controller uses the *pi4j* library to control the GPIOs. please check [http://pi4j.com/] for more info.
+* Copy the library *pi4j-core-0.0.5* in the *tomcat/lib* directory. (Library can be downloaded here [http://mvnrepository.com/artifact/com.pi4j/pi4j-core/0.0.5])
+* (Re)Start Tomcat.
+
+h3. Install SOAP service specification project.
+
+SOAP service is build using a contract-first web service. Specification project is needed to be able to build the project.
+
+Project can be downloaded here: [https://github.com/kununickurra/raspberry-remote-controller-soap-spec]
+
+In the main directory, run a maven install
+{code}
+mvn clean install
+{code}
+
+h2. Install the remote controller project
+
+Please make sure that you have configured your project before installing it [configuration]
+
+In the main directory, run a maven install with the required profile
+{code}
+mvn clean install -P[profile selected]
+{code}
+
+h2. Deploy the web application in tomcat.
+
+The artifact to deploy is *raspberry-ctrl.war* located in *raspberry-ctrl-webapp/target*
+
+Simply deploy using the tomcat administration module.
+
+h2. Simulation environment.
+
+A simulation environment can be deployed on any web server can be created using the *simulator* maven profile.
+This environment does not have any dependency on raspberry GPIO library so can be deployed anywhere and does NOT require a raspberry simulator.
+
+{code}
+mvn clean install -Psimulator
+{code}

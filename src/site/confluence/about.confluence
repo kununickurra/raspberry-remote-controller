@@ -1,0 +1,16 @@
+h1. What is this remote controller project about.
+
+h2. Drive hardware remotely using the raspberry GPIOs.
+
+This project will simply create a web application (war file) that can be deployed a raspberry (web server)
+to drive hardware using the GPIO bus of the raspberry.
+
+For now only a simple PowerSwitch REST and SOAP service is developed and the basic operations implemented.
+You will be able to drive a set of configured power switches
+physically connected to your raspberry (simple ON/OFF functionality).
+
+This service is configurable using properties files that are part of the deployed artifact.
+
+Other functionality and services could be easily added to this project.
+
+Now you can go to the [configuration] to get it up and running on your raspberry.

@@ -1,0 +1,99 @@
+h1. Configuration
+
+The service can be easily configured using properties files that are copied at build time using maven.
+
+For now it is not possible to change the configuration at run time.
+
+It can be extended to store the configuration in a database instead.
+
+h2. Properties files
+
+The configuration is split in 2 properties files, one containing the logical configuration and another file for the physical
+configuration.
+
+* The *logical configuration* will hold the *logical name* associated to the physical device connected to your raspberry
+* The *physical configuration* will hold the *mapping* between the logical configuration and the GPIO pin used to pilot it.
+
+Both files will need to be copied to the *target/classes directory* of the *raspberry-ctrl-webapp* module at compile time.
+
+The property files are located in the *raspberry-ctrl-webapp* module under the *config* directory.
+
+Different example configurations are stored in separated directories and are copied to the *target/classes* directory using *maven profiles*.
+
+Check the maven profiles definition in the *pom.xml* of the *raspberry-ctrl-webapp* module to check how the right configuration is selected.
+
+h3. Logical configuration
+
+{code}
+# Template for the Power Switch logical configuration
+# The switches declared in this list MUST have a corresponding Physical configuration,
+# system startup will fail in case of wrong/missing mapping between physical and logical configuration
+
+# Property "switches"
+#   Description: Holds a comma separated list of the power switches Id
+#   Rules:  The id MUST be numeric
+#
+# Example with 4 switches :
+#
+switches=1,2,3,4
+
+# Property "switch.{id}"
+#  Description: Contain the Logical name that you want to associate with the Power switch (e.g what is connected behind)
+#  Rules:  {id} should be replaced with the id of the switch to be configured.
+#           All switches declared in the list above MUST be defined here.
+#
+# Example with 4 switches
+#
+switch.1=Power Switch 1
+switch.2=Power Switch 2
+switch.3=Power Switch 3
+switch.4=Power Switch 4
+{code}
+
+
+h3. Physical configuration
+
+{code}
+# Template for the Power Switch Physical configuration and the mapping with the Logical configuration
+# It is based on the GPIO configuration of the Raspberry PI
+# The pins declared in this list MUST have a corresponding Logical configuration,
+# system startup will fail in case of wrong/missing mapping between physical and logical configuration
+# Note that the content of this file will depend on the Physical hardware and wiring
+# between the GPIO pins and the hardware device to handle.
+
+# Property "pins"
+#   Description : Holds a comma separated list of the pins that will be used to drive the power switches.
+#   Rules   The id MUST be numeric
+#           All Id defined here must match the Id defined in the Logical configuration
+#
+# Example with 4 pins :
+#
+pins=1,2,3,4
+
+#  Property "pin.{id}.gpio"
+#  Description: Mapping with the Physical GPIO Pin identifier
+#  Rules:   Physical GPIO Pin name must match "com.pi4j.io.gpio.RaspiPin.GPIO_{XX}"
+#           {id} should be replaced with the id of the pin to be configured.
+#  Mandatory: All pins declared in the list above MUST be defined here.
+#
+# Example with 4 pins :
+#
+pin.1.gpio=GPIO_00
+pin.2.gpio=GPIO_02
+pin.3.gpio=GPIO_03
+pin.4.gpio=GPIO_04
+
+#  Property "pin.{id}.state.switch.on"
+#  Description: Mapping between the logical switch state ON and the corresponding GPIO pin state (LOW/HIGH)
+#               Depending on the hardware connected to the GPIO, pins might need to be driven differently.
+#  Rules:   Valid GPIO Pin state (HIGH/LOW)
+#           {id} should be replaced with the id of the pin to be configured.
+#  Optional: Default: The default switch state is mapped ON -> HIGH.
+#
+# Example of mixed configuration :
+#
+
+# override default value
+# All other pin will be mapped with default mapping
+pin.2.state.switch.on=LOW
+{code}

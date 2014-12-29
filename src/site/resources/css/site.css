@@ -1,0 +1,23 @@
+a, .dropdown-menu li>a {
+	color: #ffb900;
+}
+
+.nav-list>.active>a, .nav-list>.active>a:hover {
+	background-color: #ffb900;
+}
+
+.navbar-inner, .dropdown-menu .active>a, .dropdown-menu .active>a:hover, .dropdown-menu li>a:hover, .dropdown-menu li>a:focus, .dropdown-submenu:hover>a {
+	background-color: #ffb900;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffb900), to(#d39945));
+	background-image: -webkit-linear-gradient(top, #ffb900, #d39945);
+}
+
+.navbar .nav li.dropdown.open>.dropdown-toggle, .navbar .nav li.dropdown.active>.dropdown-toggle, .navbar .nav li.dropdown.open.active>.dropdown-toggle {
+	background-color: #725326;
+}
+
+.navbar .nav>li>a {
+	text-shadow: 0 1px 0 #d39945;
+}
+
+
