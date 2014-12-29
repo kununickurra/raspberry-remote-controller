@@ -56,4 +56,4 @@ Message returned representing a power switch.
 
 !images\screenshots\SOAP_Service_message.png!
 
-The WSDL & XSD can be found in the project *raspberry-remote-controller-soap-spec* build during the [installation]
+The WSDL & XSD can be found in the project *raspberry-remote-controller-soap-spec*.
