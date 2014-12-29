@@ -13,17 +13,6 @@ h3. Pi4j
 * Copy the library *pi4j-core-0.0.5* in the *tomcat/lib* directory. (Library can be downloaded here [http://mvnrepository.com/artifact/com.pi4j/pi4j-core/0.0.5])
 * (Re)Start Tomcat.
 
-h3. Install SOAP service specification project.
-
-SOAP service is build using a contract-first web service. Specification project is needed to be able to build the project.
-
-Project can be downloaded here: [https://github.com/kununickurra/raspberry-remote-controller-soap-spec]
-
-In the main directory, run a maven install
-{code}
-mvn clean install
-{code}
-
 h2. Install the remote controller project
 
 Please make sure that you have configured your project before installing it [configuration]
