@@ -1,6 +1,0 @@
-- Upload on github
-- Implements BDD tests
-- Test on raspbery PI
-- Todos...
-- Extract Rasperry Configuration (different from models)
-- Clean up dependencies
