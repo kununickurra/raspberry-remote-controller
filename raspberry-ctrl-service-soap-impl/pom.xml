@@ -12,8 +12,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.cgi.poc</groupId>
-			<artifactId>raspberry-domotic-controller-soap-spec</artifactId>
+			<groupId>com.iot</groupId>
+			<artifactId>raspberry-remote-controller-soap-spec</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.iot</groupId>

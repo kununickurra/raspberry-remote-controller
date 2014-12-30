@@ -25,7 +25,6 @@
 		<!-- Test dependencies -->
 		<com.jayway.jsonpath.version>0.8.1</com.jayway.jsonpath.version>
 		<com.pi4j.version>0.0.5</com.pi4j.version>
-
 		<!-- Other dependencies -->
 		<commons-collections.version>3.2.1</commons-collections.version>
 		<java.version>1.7</java.version>
@@ -49,8 +48,8 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.cgi.poc</groupId>
-				<artifactId>raspberry-domotic-controller-soap-spec</artifactId>
+				<groupId>com.iot</groupId>
+				<artifactId>raspberry-remote-controller-soap-spec</artifactId>
 				<version>${raspberry.domotic.controller.soap.spec.version}</version>
 			</dependency>
 			<dependency>
